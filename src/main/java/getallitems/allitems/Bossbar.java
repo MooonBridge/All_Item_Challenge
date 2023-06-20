@@ -26,6 +26,16 @@ public class Bossbar  {
         showBossbar();
     }
 
+    public static void restartBossbar(String title){
+        List<String> mats = new ArrayList<>(config.getStringList("DONE"));
+        double progress = (double) mats.size()  /  1153;
+
+        bar = Bukkit.createBossBar(ChatColor.GREEN + title, BarColor.GREEN, BarStyle.SOLID);
+        bar.setProgress(progress);
+        bar.setVisible(true);
+        showBossbar();
+    }
+
     public static void showBossbar(){
         if (bar != null) {
             removeBossbar();
