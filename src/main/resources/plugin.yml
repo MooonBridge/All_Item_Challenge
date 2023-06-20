@@ -1,0 +1,16 @@
+name: Allitems
+version: '${1.0}'
+main: getallitems.allitems.Allitems
+api-version: '1.20'
+authors: [ MoonBridge ]
+description: A plugin that forces you to get all items in a random order
+commands:
+  start:
+    description: Starts the game
+    usage: /<command>
+  win:
+    description: Wins the game
+    usage: /<command>
+  forceskip:
+    description: Skips the current item
+    usage: /<command>
