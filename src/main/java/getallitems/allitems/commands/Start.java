@@ -27,7 +27,6 @@ public class Start implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player) {
-            Allitems.startGame();
             Player p = (Player) sender;
             allmats = getAllMats();
 

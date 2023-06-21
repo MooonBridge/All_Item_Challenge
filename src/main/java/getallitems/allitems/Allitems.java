@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Allitems extends JavaPlugin {
 
     private static Allitems instance;
-    private static boolean started = false;
+
     static ArmorStand armorStand;
     FileConfiguration config = this.getConfig();
 
@@ -33,7 +33,7 @@ public final class Allitems extends JavaPlugin {
 
         config.options().copyDefaults(true);
 
-        if (started) {
+        if (config.contains("CURRENT")) {
             String input = config.getString("CURRENT").replace("_", " ");
             input = input.toLowerCase();
             String output = input.substring(0, 1).toUpperCase() + input.substring(1);
@@ -49,10 +49,6 @@ public final class Allitems extends JavaPlugin {
 
     public static Allitems getInstance(){
         return instance;
-    }
-
-    public static void startGame(){
-        started = true;
     }
 
 
