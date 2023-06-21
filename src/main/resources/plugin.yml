@@ -1,5 +1,5 @@
 name: Allitems
-version: '${1.0}'
+version: '${1.1}'
 main: getallitems.allitems.Allitems
 api-version: '1.20'
 authors: [ MoonBridge ]
