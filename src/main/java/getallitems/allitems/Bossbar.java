@@ -27,6 +27,9 @@ public class Bossbar  {
     }
 
     public static void restartBossbar(String title){
+        if (bar != null){
+            removeBossbar();
+        }
         List<String> mats = new ArrayList<>(config.getStringList("DONE"));
         double progress = (double) mats.size()  /  1153;
 
