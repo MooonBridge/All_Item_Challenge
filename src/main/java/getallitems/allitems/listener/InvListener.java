@@ -2,6 +2,7 @@ package getallitems.allitems.listener;
 
 import getallitems.allitems.Allitems;
 import getallitems.allitems.Bossbar;
+import getallitems.allitems.InvChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -22,7 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class InvListener implements Listener {
 
     public static boolean gewonnen = false;
-    FileConfiguration config = Allitems.getInstance().getConfig();
+    static FileConfiguration config = Allitems.getInstance().getConfig();
 
 
     @EventHandler
@@ -74,6 +75,10 @@ public class InvListener implements Listener {
 
             Allitems.getInstance().saveConfig();
 
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                InvChecker.checkInv(player);
+            }
+
         }
 
     }
@@ -124,6 +129,10 @@ public class InvListener implements Listener {
 
             Allitems.getInstance().saveConfig();
 
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                InvChecker.checkInv(player);
+            }
+
         }
     }
 
@@ -132,12 +141,13 @@ public class InvListener implements Listener {
     }
 
     public static void won(){
+        config.set("WON", true);
         Bossbar.winGame();
         for (Player p : Bukkit.getOnlinePlayers()){
-            Bossbar.removeBossbar();
             p.sendTitle("§eVICTORY", "§6You've collected all 1153 items", 20, 40, 20);
             p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 10, 1);
         }
+        Allitems.getInstance().saveConfig();
     }
 
 }

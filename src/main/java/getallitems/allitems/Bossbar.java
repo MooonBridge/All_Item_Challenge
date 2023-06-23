@@ -1,5 +1,6 @@
 package getallitems.allitems;
 
+import getallitems.allitems.listener.InvListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -33,6 +34,12 @@ public class Bossbar  {
         bar = Bukkit.createBossBar(ChatColor.GREEN + title, BarColor.GREEN, BarStyle.SOLID);
         bar.setProgress(progress);
         bar.setVisible(true);
+        if (config.contains("WON")){
+            if ((boolean) config.get("WON")){
+                winGame();
+                return;
+            }
+        }
         showBossbar();
     }
 
@@ -55,14 +62,20 @@ public class Bossbar  {
     }
 
     public static void removeBossbar(){
+        if (bar == null){
+            return;
+        }
         for (Player p : Bukkit.getOnlinePlayers()){
             bar.removePlayer(p);
         }
     }
 
     public static void winGame(){
-        bar.setTitle(ChatColor.GOLD + "GAME WON");
-        bar.setColor(BarColor.YELLOW);
+        if (bar != null){
+            removeBossbar();
+        }
+        bar = Bukkit.createBossBar(ChatColor.GOLD + "GAME WON", BarColor.YELLOW, BarStyle.SOLID);
         bar.setProgress(1);
+        showBossbar();
     }
 }

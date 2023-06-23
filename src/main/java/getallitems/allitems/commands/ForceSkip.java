@@ -2,6 +2,8 @@ package getallitems.allitems.commands;
 
 import getallitems.allitems.Allitems;
 import getallitems.allitems.Bossbar;
+import getallitems.allitems.InvChecker;
+import getallitems.allitems.listener.InvListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -21,6 +23,10 @@ public class ForceSkip implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        if (InvListener.gewonnen){
+            return true;
+        }
 
         if (config.getStringList("TO-DO").isEmpty()){
             Bossbar.winGame();
@@ -53,6 +59,13 @@ public class ForceSkip implements CommandExecutor {
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_HURT, 10, 1);
             player.sendMessage(ChatColor.AQUA + "Nächstes Item: " + ChatColor.GREEN + output);
         }
+
+        Allitems.getInstance().saveConfig();
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            InvChecker.checkInv(player);
+        }
+
         return true;
     }
 }

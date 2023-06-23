@@ -2,6 +2,7 @@ package getallitems.allitems.commands;
 
 import getallitems.allitems.Allitems;
 import getallitems.allitems.Bossbar;
+import getallitems.allitems.InvChecker;
 import getallitems.allitems.listener.InvListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -36,6 +37,8 @@ public class Start implements CommandExecutor {
             Player p = (Player) sender;
             allmats = getAllMats();
 
+            config.set("WON", false);
+
             InvListener.setGewonnen(false);
 
             int randomNum = ThreadLocalRandom.current().nextInt(0, allmats.size() + 1);
@@ -59,6 +62,10 @@ public class Start implements CommandExecutor {
 
             Allitems.getInstance().saveConfig();
 
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                InvChecker.checkInv(player);
+            }
+
         }
 
         return true;
@@ -70,7 +77,7 @@ public class Start implements CommandExecutor {
         List<String> remainingMaterials = new ArrayList<>();
         for (Material mat : materials) {
             List<Material> forbidden = new ArrayList<>();
-            forbidden.addAll(Arrays.asList(Material.AIR, Material.SPAWNER, Material.SUSPICIOUS_GRAVEL, Material.SUSPICIOUS_SAND, Material.FARMLAND, Material.BARRIER, Material.LIGHT, Material.STRUCTURE_VOID, Material.STRUCTURE_BLOCK, Material.JIGSAW, Material.PLAYER_HEAD, Material.DEBUG_STICK, Material.BUDDING_AMETHYST, Material.FROGSPAWN));
+            forbidden.addAll(Arrays.asList(Material.AIR, Material.SPAWNER, Material.SUSPICIOUS_GRAVEL, Material.SUSPICIOUS_SAND, Material.FARMLAND, Material.BARRIER, Material.LIGHT, Material.STRUCTURE_VOID, Material.STRUCTURE_BLOCK, Material.JIGSAW, Material.PLAYER_HEAD, Material.DEBUG_STICK, Material.BUDDING_AMETHYST, Material.FROGSPAWN, Material.BUNDLE));
             if (!forbidden.contains(mat) && !mat.name().contains("SPAWN_EGG") && !mat.name().contains("INFESTED") && !mat.name().contains("COMMAND")) {
                 remainingMaterials.add(mat.name());
             }
