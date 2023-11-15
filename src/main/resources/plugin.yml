@@ -14,3 +14,6 @@ commands:
   forceskip:
     description: Skips the current item
     usage: /<command>
+  stats:
+    description: Shows your current progress
+    usage: /<command>

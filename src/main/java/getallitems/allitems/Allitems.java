@@ -2,9 +2,11 @@ package getallitems.allitems;
 
 import getallitems.allitems.commands.ForceSkip;
 import getallitems.allitems.commands.Start;
+import getallitems.allitems.commands.Stats;
 import getallitems.allitems.commands.Win;
 import getallitems.allitems.listener.InvListener;
 import getallitems.allitems.listener.JoinListener;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.plugin.PluginManager;
@@ -28,6 +30,7 @@ public final class Allitems extends JavaPlugin {
         this.getCommand("start").setExecutor(new Start());
         this.getCommand("win").setExecutor(new Win());
         this.getCommand("forceskip").setExecutor(new ForceSkip());
+        this.getCommand("stats").setExecutor(new Stats());
 
         System.out.println("PLUGIN LOADED");
 

@@ -3,6 +3,7 @@ package getallitems.allitems.listener;
 import getallitems.allitems.Allitems;
 import getallitems.allitems.Bossbar;
 import getallitems.allitems.InvChecker;
+import getallitems.allitems.commands.Stats;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -11,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.checkerframework.common.value.qual.EnumVal;
 
@@ -28,6 +30,11 @@ public class InvListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
+
+        if (event.getClickedInventory().equals(Stats.getInv())){
+            event.setCancelled(true);
+            return;
+        }
 
         if (event.getCurrentItem() == null){
             return;
@@ -133,6 +140,13 @@ public class InvListener implements Listener {
                 InvChecker.checkInv(player);
             }
 
+        }
+    }
+
+    @EventHandler
+    public void onInventoryDrag(InventoryDragEvent event){
+        if (event.getInventory().equals(Stats.getInv())){
+            event.setCancelled(true);
         }
     }
 
